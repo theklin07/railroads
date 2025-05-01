@@ -1,0 +1,25 @@
+
+-- DDL for railroad table --
+CREATE TABLE railroad (
+    id INT PRIMARY KEY,
+    railroad_name VARCHAR(100),
+    segment VARCHAR(10)
+);
+
+-- DDL for equipment table -- 
+CREATE TABLE equipment (
+    id INT PRIMARY KEY,
+    equipment_name VARCHAR(100),
+    daily_rate INT
+);
+
+-- DDL for lease table --
+CREATE TABLE lease (
+    id INT PRIMARY KEY,
+    railroad_id INT,
+    equipment_id INT,
+    days_leased INT,
+    total_revenue INT,
+    FOREIGN KEY (railroad_id) REFERENCES railroad(id),
+    FOREIGN KEY (equipment_id) REFERENCES equipment(id)
+);
