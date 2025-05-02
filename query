@@ -1,0 +1,25 @@
+-- Total revenue of the company --
+SELECT SUM(total_revenue) AS total_company_revenue FROM lease;
+
+-- Which customer segment spent more --
+SELECT r.segment, SUM(l.total_revenue) AS segment_revenue
+FROM lease l
+JOIN railroad r ON l.railroad_id = r.id
+GROUP BY r.segment
+ORDER BY segment_revenue DESC;
+
+-- Which asset generated the most revenue --
+SELECT e.equipment_name, SUM(l.total_revenue) AS asset_revenue
+FROM lease l
+JOIN equipment e ON l.equipment_id = e.id
+GROUP BY e.equipment_name
+ORDER BY asset_revenue DESC
+LIMIT 1;
+
+-- Which railroad generated the least revenue --
+SELECT r.railroad_name, SUM(l.total_revenue) AS railroad_revenue
+FROM lease l
+JOIN railroad r ON l.railroad_id = r.id
+GROUP BY r.railroad_name
+ORDER BY railroad_revenue ASC
+LIMIT 1;
